@@ -2,6 +2,8 @@ package ar.edu.uai.paradigms.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,14 +35,26 @@ public class PersonController {
 	private PersonTranslator personTranslator;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public @ResponseBody PersonDTO createPerson(@RequestBody PersonDTO personDTO) {
+	public @ResponseBody ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO personDTO) {
 		LOGGER.debug("Received DTO: " + personDTO);
-		return this.personTranslator.translateToDTO(this.personService
-                .savePerson(this.personTranslator.translate(personDTO)));
+		return new ResponseEntity<PersonDTO>(this.personTranslator.translateToDTO(this.personService
+                .savePerson(this.personTranslator.translate(personDTO))), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{identifier}")
-	public @ResponseBody PersonDTO getPerson(@PathVariable String identifier) {
-		return this.personTranslator.translateToDTO(this.personService.retrievePerson(identifier));
+	public @ResponseBody ResponseEntity<PersonDTO> getPerson(@PathVariable String identifier) throws InterruptedException
+    {
+		PersonDTO person = this.personTranslator.translateToDTO(this.personService.retrievePerson(identifier));
+        if(person != null) {
+            return new ResponseEntity<PersonDTO>(person, HttpStatus.OK);
+        }
+        return new ResponseEntity<PersonDTO>(HttpStatus.NO_CONTENT);
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{identifier}")
+	public @ResponseBody
+	ResponseEntity<String> deletePerson(@PathVariable String identifier) {
+		this.personService.deletePerson(identifier);
+		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
 }

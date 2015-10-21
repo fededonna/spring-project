@@ -23,4 +23,11 @@ public class PersonServiceImpl implements PersonService {
         return this.personDAO.retrieve(identifier);
     }
 
+    @Transactional
+    @Override
+    public void deletePerson(String identifier)
+    {
+        this.personDAO.delete(identifier);
+    }
+
 }

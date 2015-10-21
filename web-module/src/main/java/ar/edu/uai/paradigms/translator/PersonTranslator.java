@@ -10,6 +10,9 @@ public class PersonTranslator {
 	}
 
 	public PersonDTO translateToDTO(Person person) {
-		return new PersonDTO(person.getName(), person.getAge());
+		if(person != null) {
+			return new PersonDTO(person.getName(), person.getAge());
+		}
+		return null;
 	}
 }

@@ -4,7 +4,9 @@ import ar.edu.uai.model.Person;
 
 public interface PersonService {
 
-	public Person savePerson(Person person);
+    Person savePerson(Person person);
 
-    public Person retrievePerson(String identifier);
+    Person retrievePerson(String identifier);
+
+    void deletePerson(String identifier);
 }
