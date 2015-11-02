@@ -5,14 +5,14 @@ import ar.edu.uai.paradigms.dto.PersonDTO;
 
 public class PersonTranslator {
 
-	public Person translate(PersonDTO personDTO) {
-		return new Person(personDTO.getName(),	personDTO.getAge());
-	}
+    public Person translate(PersonDTO personDTO) {
+        return new Person(personDTO.getId(), personDTO.getName(), personDTO.getAge());
+    }
 
-	public PersonDTO translateToDTO(Person person) {
-		if(person != null) {
-			return new PersonDTO(person.getName(), person.getAge());
-		}
-		return null;
-	}
+    public PersonDTO translateToDTO(Person person) {
+        if (person != null) {
+            return new PersonDTO(person.getId(), person.getName(), person.getAge());
+        }
+        return null;
+    }
 }

@@ -8,35 +8,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class PersonDTO {
 
-	@JsonCreator
-	public PersonDTO(@JsonProperty("name")String name, @JsonProperty("age")int age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
+    private Integer id;
 
-	private String name;
-	private int age;
+    private String name;
+    private int age;
 
-	public String getName() {
-		return name;
-	}
+    @JsonCreator
+    public PersonDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("age") int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	@Override
-	public String toString() {
-		return "PersonDTO [name=" + name + ", age=" + age + "]";
-	}
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " [id=" + id + ", name=" + name + ", age=" + age + "]";
+    }
 
 }

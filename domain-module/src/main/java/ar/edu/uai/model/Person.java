@@ -1,7 +1,13 @@
 package ar.edu.uai.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERSON")
@@ -9,38 +15,40 @@ import javax.persistence.*;
 public class Person {
 
     @Id
+    @GeneratedValue
+    @Column(name = "PERSON_ID", unique = true, nullable = false)
+    private Integer id;
+
     @Column(name = "NAME", nullable = false)
-	private String name;
+    private String name;
 
     @Column(name = "AGE", nullable = false)
-	private int age;
+    private Integer age;
 
-    public Person(){}
+    public Person() {
+    }
 
-	public Person(String name, int age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
+    public Person(Integer id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getAge() {
-		return age;
-	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
-	}
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " [id=" + id + ", name=" + name + ", age=" + age + "]";
+    }
 }

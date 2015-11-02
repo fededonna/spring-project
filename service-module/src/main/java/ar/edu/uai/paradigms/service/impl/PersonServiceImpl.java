@@ -15,18 +15,17 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional
     public Person savePerson(Person person) {
-		return this.personDAO.create(person);
-	}
+        return this.personDAO.create(person);
+    }
 
     @Override
-    public Person retrievePerson(String identifier) {
+    public Person retrievePerson(Integer identifier) {
         return this.personDAO.retrieve(identifier);
     }
 
     @Transactional
     @Override
-    public void deletePerson(String identifier)
-    {
+    public void deletePerson(Integer identifier) {
         this.personDAO.delete(identifier);
     }
 

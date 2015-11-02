@@ -1,4 +1,5 @@
 package ar.edu.uai.paradigms.service;
+
 import ar.edu.uai.model.Person;
 
 
@@ -6,7 +7,7 @@ public interface PersonService {
 
     Person savePerson(Person person);
 
-    Person retrievePerson(String identifier);
+    Person retrievePerson(Integer identifier);
 
-    void deletePerson(String identifier);
+    void deletePerson(Integer identifier);
 }

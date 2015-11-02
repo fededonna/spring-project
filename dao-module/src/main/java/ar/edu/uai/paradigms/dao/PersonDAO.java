@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 /**
  * Created by Federico on 19/10/2014.
  */
-public class PersonDAO implements PersistentDAO<Person, String> {
+public class PersonDAO implements PersistentDAO<Person, Integer> {
 
     @PersistenceContext(unitName = "paradigms-persistence-unit")
     private EntityManager entityManager;
@@ -20,7 +20,7 @@ public class PersonDAO implements PersistentDAO<Person, String> {
     }
 
     @Override
-    public Person retrieve(String id) {
+    public Person retrieve(Integer id) {
         return this.entityManager.find(Person.class, id);
     }
 
@@ -30,7 +30,7 @@ public class PersonDAO implements PersistentDAO<Person, String> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         this.entityManager.remove(this.retrieve(id));
     }
 }
