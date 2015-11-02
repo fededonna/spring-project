@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by Federico Donnarumma on 10/15/14.
@@ -44,6 +47,15 @@ public class PersonController {
         LOGGER.debug("Received DTO: " + personDTO);
         return new ResponseEntity<PersonDTO>(this.personTranslator.translateToDTO(this.personService
                 .savePerson(this.personTranslator.translate(personDTO))), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public
+    @ResponseBody
+    ResponseEntity<List<PersonDTO>> retrieveByCriteria(@RequestParam("name") String name) {
+        LOGGER.debug("Received QUERY: " + name);
+        return new ResponseEntity<List<PersonDTO>>(this.personTranslator.translateToDTO(this.personService
+                .retrieveByCriteria(name)), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{identifier}")
