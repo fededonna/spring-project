@@ -1,19 +1,15 @@
-package ar.edu.uai.paradigms.controller;
+package ar.edu.uai.paradigms.controller.person;
 
-import ar.edu.uai.paradigms.dto.PersonDTO;
+import ar.edu.uai.paradigms.dto.person.PersonCriteriaDTO;
+import ar.edu.uai.paradigms.dto.person.PersonDTO;
 import ar.edu.uai.paradigms.service.PersonService;
-import ar.edu.uai.paradigms.translator.PersonTranslator;
+import ar.edu.uai.paradigms.translator.person.PersonTranslator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,10 +48,10 @@ public class PersonController {
     @RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
-    ResponseEntity<List<PersonDTO>> retrieveByCriteria(@RequestParam("name") String name) {
-        LOGGER.debug("Received QUERY: " + name);
+    ResponseEntity<List<PersonDTO>> retrieveByCriteria(PersonCriteriaDTO personCriteria) {
+        LOGGER.debug("Received QUERY: " + personCriteria);
         return new ResponseEntity<List<PersonDTO>>(this.personTranslator.translateToDTO(this.personService
-                .retrieveByCriteria(name)), HttpStatus.OK);
+                .retrieveByCriteria(this.personTranslator.translateCriteria(personCriteria))), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{identifier}")

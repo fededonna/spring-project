@@ -1,7 +1,9 @@
-package ar.edu.uai.paradigms.translator;
+package ar.edu.uai.paradigms.translator.person;
 
-import ar.edu.uai.model.Person;
-import ar.edu.uai.paradigms.dto.PersonDTO;
+import ar.edu.uai.model.person.Person;
+import ar.edu.uai.model.person.PersonCriteria;
+import ar.edu.uai.paradigms.dto.person.PersonCriteriaDTO;
+import ar.edu.uai.paradigms.dto.person.PersonDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +31,9 @@ public class PersonTranslator {
         }
         return personResponse;
     }
+
+    public PersonCriteria translateCriteria(PersonCriteriaDTO personCriteriaDTO) {
+        return new PersonCriteria(personCriteriaDTO.getName(), personCriteriaDTO.getMinAge(), personCriteriaDTO.getMaxAge());
+    }
+
 }

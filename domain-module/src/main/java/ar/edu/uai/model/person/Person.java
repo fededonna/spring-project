@@ -1,4 +1,4 @@
-package ar.edu.uai.model;
+package ar.edu.uai.model.person;
 
 
 import javax.persistence.Access;

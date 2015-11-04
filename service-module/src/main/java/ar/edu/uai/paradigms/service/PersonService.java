@@ -1,6 +1,7 @@
 package ar.edu.uai.paradigms.service;
 
-import ar.edu.uai.model.Person;
+import ar.edu.uai.model.person.Person;
+import ar.edu.uai.model.person.PersonCriteria;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface PersonService {
 
     void deletePerson(Integer identifier);
 
-    List<Person> retrieveByCriteria(String criteria);
+    List<Person> retrieveByCriteria(PersonCriteria criteria);
 }

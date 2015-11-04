@@ -1,6 +1,7 @@
 package ar.edu.uai.paradigms.service.impl;
 
-import ar.edu.uai.model.Person;
+import ar.edu.uai.model.person.Person;
+import ar.edu.uai.model.person.PersonCriteria;
 import ar.edu.uai.paradigms.dao.PersonDAO;
 import ar.edu.uai.paradigms.service.PersonService;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> retrieveByCriteria(String criteria) {
+    public List<Person> retrieveByCriteria(PersonCriteria criteria) {
         return this.personDAO.retrieveByCriteria(criteria);
     }
 
