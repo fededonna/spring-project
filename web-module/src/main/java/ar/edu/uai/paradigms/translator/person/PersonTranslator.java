@@ -16,7 +16,7 @@ public class PersonTranslator {
 
     public PersonDTO translateToDTO(Person person) {
         if (person != null) {
-            return new PersonDTO(person.getId(), person.getName(), person.getAge());
+            return new PersonDTO(person.getId(), person.getName(), person.getAge(), person.getChilds());
         }
         return null;
     }

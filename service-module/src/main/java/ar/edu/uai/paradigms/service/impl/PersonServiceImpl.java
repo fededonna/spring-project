@@ -34,7 +34,10 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     @Override
     public Person addChildren(Integer identifier, Person children) {
-        return this.personDAO.create(children);
+        Person hijo = this.personDAO.create(children);
+        Person padre = this.personDAO.retrieve(identifier);
+        padre.addChidren(hijo);
+        return padre;
     }
 
     @Override

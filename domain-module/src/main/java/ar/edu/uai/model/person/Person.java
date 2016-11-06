@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name = "PERSON")
@@ -36,6 +37,18 @@ public class Person {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.childs = new ArrayList<Integer>();
+    }
+
+    public ArrayList<Integer> addChidren(Person child) {
+        if(!childs.contains(child.getId())){
+            childs.add(child.getId());
+        }
+        return childs;
+    }
+
+    public ArrayList<Integer> getChilds() {
+        return childs;
     }
 
     public Integer getId() {
@@ -52,6 +65,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + " [id=" + id + ", name=" + name + ", age=" + age + "]";
+        return this.getClass().getSimpleName() + " [id=" + id + ", name=" + name + ", age=" + age + ", children=" + childs + "]";
     }
 }
