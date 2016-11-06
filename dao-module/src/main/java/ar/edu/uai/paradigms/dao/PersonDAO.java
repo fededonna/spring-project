@@ -69,4 +69,10 @@ public class PersonDAO implements PersistentDAO<Person, Integer, PersonCriteria>
 
         return typedQuery.getResultList();
     }
+
+    public Person createChilder(Person children, Person parent) {
+        children.setParent(parent);
+        this.entityManager.persist(children);
+        return children;
+    }
 }

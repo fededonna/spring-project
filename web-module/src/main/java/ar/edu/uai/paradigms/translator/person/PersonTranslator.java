@@ -7,6 +7,7 @@ import ar.edu.uai.paradigms.dto.person.PersonDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonTranslator {
 
@@ -16,9 +17,17 @@ public class PersonTranslator {
 
     public PersonDTO translateToDTO(Person person) {
         if (person != null) {
-            return new PersonDTO(person.getId(), person.getName(), person.getAge(), person.getChilds());
+            return new PersonDTO(person.getId(), person.getName(), person.getAge(), getChildrenIds(person));
         }
         return null;
+    }
+
+    private List<Integer> getChildrenIds(Person person) {
+        List<Integer> childs = new ArrayList<Integer>();
+        for(Person p : person.getChilds()) {
+            childs.add(p.getId());
+        }
+        return childs;
     }
 
     public List<PersonDTO> translateToDTO(List<Person> persons) {

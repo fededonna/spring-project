@@ -31,13 +31,13 @@ public class PersonServiceImpl implements PersonService {
     public void deletePerson(Integer identifier) {
         this.personDAO.delete(identifier);
     }
+
     @Transactional
     @Override
     public Person addChildren(Integer identifier, Person children) {
-        Person hijo = this.personDAO.create(children);
         Person padre = this.personDAO.retrieve(identifier);
-        padre.addChidren(hijo);
-        return padre;
+        this.personDAO.createChilder(children, padre);
+        return children;
     }
 
     @Override
