@@ -31,6 +31,11 @@ public class PersonServiceImpl implements PersonService {
     public void deletePerson(Integer identifier) {
         this.personDAO.delete(identifier);
     }
+    @Transactional
+    @Override
+    public Person addChildren(Integer identifier, Person children) {
+        return this.personDAO.create(children);
+    }
 
     @Override
     public List<Person> retrieveByCriteria(PersonCriteria criteria) {

@@ -14,5 +14,7 @@ public interface PersonService {
 
     void deletePerson(Integer identifier);
 
+    Person addChildren(Integer identifier, Person children);
+
     List<Person> retrieveByCriteria(PersonCriteria criteria);
 }

@@ -72,4 +72,13 @@ public class PersonController {
         this.personService.deletePerson(identifier);
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{identifier}", consumes = "application/json")
+    public
+    @ResponseBody
+    ResponseEntity<PersonDTO> addChild(@PathVariable Integer identifier, @RequestBody PersonDTO personDTO) {
+        LOGGER.debug("Received DTO: " + personDTO);
+        return new ResponseEntity<PersonDTO>(this.personTranslator.translateToDTO(this.personService
+                .addChildren(identifier, this.personTranslator.translate(personDTO))), HttpStatus.OK);
+    }
 }

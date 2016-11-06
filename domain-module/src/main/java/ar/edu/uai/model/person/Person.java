@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "PERSON")
@@ -24,6 +25,9 @@ public class Person {
 
     @Column(name = "AGE", nullable = false)
     private Integer age;
+
+    @Column(name = "CHILDS", nullable = true)
+    private ArrayList<Integer> childs;
 
     public Person() {
     }
