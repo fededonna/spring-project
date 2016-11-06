@@ -82,9 +82,8 @@ public class PersonController {
     @ResponseBody
     ResponseEntity<PersonDTO> addChild(@PathVariable Integer identifier, @RequestBody PersonDTO personDTO) {
         LOGGER.debug("Received DTO: " + personDTO);
-        Person pdto1 = this.personTranslator.translate(personDTO);
-        Person pr = this.personService
-                .addChildren(identifier, pdto1);
+        Person prChildren = this.personTranslator.translate(personDTO);
+        Person pr = this.personService.addChildren(identifier, prChildren);
         PersonDTO pdto = this.personTranslator.translateToDTO(pr);
         return new ResponseEntity<PersonDTO>(pdto, HttpStatus.OK);
     }
