@@ -1,5 +1,6 @@
 package ar.edu.uai.paradigms.dto.person;
 
+import ar.edu.uai.model.person.Person;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,11 +19,21 @@ public class PersonDTO {
     private ArrayList<Integer> childs;
 
     @JsonCreator
-    public PersonDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("age") int age, @JsonProperty("childs") ArrayList<Integer> childs) {
+    public PersonDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name, @JsonProperty("age") int age, @JsonProperty("childs") ArrayList<Person> childs) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.childs = childs;
+        this.childs = new ArrayList<Integer>();
+        if(childs != null && childs.size() > 0){
+            Object arrChilds = childs.toArray();
+            for(Person child: (Person[])arrChilds){
+                this.childs.add(child.getId());
+            }
+        }
+    }
+
+    public ArrayList<Integer> getChilds() {
+        return childs;
     }
 
     public Integer getId() {

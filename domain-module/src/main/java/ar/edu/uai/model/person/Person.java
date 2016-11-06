@@ -28,7 +28,7 @@ public class Person {
     private Integer age;
 
     @Column(name = "CHILDS", nullable = true)
-    private ArrayList<Integer> childs;
+    private ArrayList<Person> childs;
 
     public Person() {
     }
@@ -37,17 +37,17 @@ public class Person {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.childs = new ArrayList<Integer>();
+        this.childs = new ArrayList<Person>();
     }
 
-    public ArrayList<Integer> addChidren(Person child) {
-        if(!childs.contains(child.getId())){
-            childs.add(child.getId());
+    public ArrayList<Person> addChidren(Person child) {
+        if(!childs.contains(child)){
+            childs.add(child);
         }
         return childs;
     }
 
-    public ArrayList<Integer> getChilds() {
+    public ArrayList<Person> getChilds() {
         return childs;
     }
 

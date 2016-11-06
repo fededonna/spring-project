@@ -1,5 +1,6 @@
 package ar.edu.uai.paradigms.controller.person;
 
+import ar.edu.uai.model.person.Person;
 import ar.edu.uai.paradigms.dto.person.PersonCriteriaDTO;
 import ar.edu.uai.paradigms.dto.person.PersonDTO;
 import ar.edu.uai.paradigms.service.PersonService;
@@ -58,11 +59,14 @@ public class PersonController {
     public
     @ResponseBody
     ResponseEntity<PersonDTO> getPerson(@PathVariable Integer identifier) throws InterruptedException {
+        ResponseEntity<PersonDTO> returnValue = null;
         PersonDTO person = this.personTranslator.translateToDTO(this.personService.retrievePerson(identifier));
         if (person != null) {
-            return new ResponseEntity<PersonDTO>(person, HttpStatus.OK);
+            returnValue = new ResponseEntity<PersonDTO>(person, HttpStatus.OK);
+            return returnValue;
         }
-        return new ResponseEntity<PersonDTO>(HttpStatus.NO_CONTENT);
+        returnValue = new ResponseEntity<PersonDTO>(HttpStatus.NO_CONTENT);
+        return returnValue;
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{identifier}")
@@ -78,7 +82,10 @@ public class PersonController {
     @ResponseBody
     ResponseEntity<PersonDTO> addChild(@PathVariable Integer identifier, @RequestBody PersonDTO personDTO) {
         LOGGER.debug("Received DTO: " + personDTO);
-        return new ResponseEntity<PersonDTO>(this.personTranslator.translateToDTO(this.personService
-                .addChildren(identifier, this.personTranslator.translate(personDTO))), HttpStatus.OK);
+        Person pdto1 = this.personTranslator.translate(personDTO);
+        Person pr = this.personService
+                .addChildren(identifier, pdto1);
+        PersonDTO pdto = this.personTranslator.translateToDTO(pr);
+        return new ResponseEntity<PersonDTO>(pdto, HttpStatus.OK);
     }
 }
